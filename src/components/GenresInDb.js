@@ -8,7 +8,9 @@ class GenresInDb extends Component {
     constructor(){
         super()
         this.state={
-            genresList: []
+            genresList: [],
+            cardBodyClass: "card-body"
+
         }
     }
     componentDidMount=()=>{
@@ -23,6 +25,14 @@ class GenresInDb extends Component {
             .catch(error => console.log(error))
     }
 
+    agregarClase = () => {
+        this.setState({cardBodyClass:"card-body bg-secondary"});
+    }
+
+    quitarClase = () => {
+        this.setState({cardBodyClass:"card-body"});
+    }
+
     render(){
         return (
             <React.Fragment>
@@ -30,9 +40,9 @@ class GenresInDb extends Component {
                     <div className="col-lg-6 mb-4">						
                         <div className="card shadow mb-4">
                             <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold text-gray-800">Genres in Data Base</h6>
+                                <h6 onMouseOver={()=>this.agregarClase()} onMouseOut={()=>this.quitarClase()} className="m-0 font-weight-bold text-gray-800">Genres in Data Base</h6>
                             </div>
-                            <div className="card-body">
+                            <div className={this.state.cardBodyClass}>
                                 <div className="row">
                                     {
                                         this.state.genresList.map((genre,index)=>{
